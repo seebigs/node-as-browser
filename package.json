@@ -1,0 +1,22 @@
+{
+  "name": "node-as-browser",
+  "version": "1.0.0",
+  "description": "Create a browser-like environment within a Node.js context",
+  "main": "index.js",
+  "scripts": {
+    "repl": "node ./test/interactive.js && node",
+    "test": "node ./test/automated.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seebigs/node-as-browser.git"
+  },
+  "author": "Chris Bigelow <seebigswork@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seebigs/node-as-browser/issues"
+  },
+  "dependencies": {
+    "jsdom": "^9.6.0"
+  }
+}
