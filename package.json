@@ -18,5 +18,8 @@
   },
   "dependencies": {
     "jsdom": "^9.6.0"
+  },
+  "devDependencies": {
+    "feather-test": "^0.5.0"
   }
 }
