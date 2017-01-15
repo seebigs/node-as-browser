@@ -1,5 +1,5 @@
 
-describe('location', function () {
+describe('location', function (expect) {
     expect(location.href).toBe(url);
     expect(location.protocol).toBe('https:');
     expect(location.hostname).toBe('www.example.com');
@@ -9,42 +9,43 @@ describe('location', function () {
     expect(location.hash).toBe('#anchor');
 });
 
-describe('navigator', function () {
+describe('navigator', function (expect) {
     expect(navigator.userAgent).toContain('Node.js');
 });
 
-describe('HTMLElement', function () {
+describe('HTMLElement', function (expect) {
     expect(HTMLElement.toString()).toContain('HTMLElement');
 });
 
-describe('CSSRule', function () {
+describe('CSSRule', function (expect) {
     expect(CSSRule.toString()).toContain('CSSRule');
 });
 
-describe('JSON', function () {
+describe('JSON', function (expect) {
     expect(JSON.stringify({ abc: 123 })).toBe('{"abc":123}');
 });
 
-describe('XMLHttpRequest', function () {
+describe('XMLHttpRequest', function (expect) {
     expect(new XMLHttpRequest().toString()).toBe('[object XMLHttpRequest]');
 });
 
-describe('addEventListener', function () {
+describe('addEventListener', function (expect) {
     expect(typeof addEventListener).toBe('function');
 });
 
-describe('blur', function () {
+describe('blur', function (expect) {
     expect(typeof blur).toBe('function');
 });
 
-describe('localStorage', function () {
+describe('localStorage', function (expect) {
     expect(typeof localStorage.setItem).toBe('function');
 });
 
-describe('self', function () {
-    expect(self).toBe(window);
+describe('self', function (expect) {
+    var winHasSelf = self === window;
+    expect(winHasSelf).toBe(true);
 });
 
-describe('innerWidth', function () {
+describe('innerWidth', function (expect) {
     expect(innerWidth > 1).toBe(true);
 });

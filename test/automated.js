@@ -12,6 +12,6 @@ nodeAsBrowser.init({
     html: '<!DOCTYPE html><head></head><body data-action="bhave" style="color:red"><div id="gremlins"><div class="gizmo mogwai"></div><div class="stripe mogwai"></div></div></body></html>'
 });
 
-featherTest.specs('./specs');
+featherTest.queue('./specs');
 
 featherTest.run();
