@@ -1,4 +1,5 @@
 
+var fetch = require('node-fetch');
 var jsdom = require("jsdom").jsdom;
 
 function enhanceToString () {
@@ -21,6 +22,8 @@ function init (options) {
     options = options || {};
     var context = options.context || global;
 
+    options.url = options.url || 'http://example.com/';
+
     var win = jsdom(options.html || '<!DOCTYPE html>', options).defaultView;
 
     win.document.hasFocus = function () { return true; };
@@ -42,6 +45,8 @@ function init (options) {
         };
     })();
 
+    win.fetch = fetch;
+
     context.window = win;
 
     for (var x in win) {
@@ -55,6 +60,8 @@ function init (options) {
             context[y] = win[y];
         }
     }
+
+    context.Image = win.Image;
 
     // Enhance toString output for DOM nodes
     enhanceToString();

@@ -17,7 +17,8 @@
     "url": "https://github.com/seebigs/node-as-browser/issues"
   },
   "dependencies": {
-    "jsdom": "^9.9.1"
+    "jsdom": "^9.9.1",
+    "node-fetch": "^1.6.3"
   },
   "devDependencies": {
     "feather-test": "^1.2.0"

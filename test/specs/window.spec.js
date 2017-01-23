@@ -49,3 +49,11 @@ describe('self', function (expect) {
 describe('innerWidth', function (expect) {
     expect(innerWidth > 1).toBe(true);
 });
+
+describe('fetch', function (expect) {
+    expect(typeof fetch).toBe('function');
+});
+
+describe('Promise', function (expect) {
+    expect(typeof Promise).toBe('function');
+});
