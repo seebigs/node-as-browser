@@ -47,6 +47,13 @@ function init (options) {
 
     win.fetch = fetch;
 
+    win.screen.availTop = 0;
+    win.screen.availLeft = 0;
+    win.screen.width = win.innerWidth;
+    win.screen.height = win.innerHeight;
+    win.screen.colorDepth = 32;
+    win.screen.pixelDepth = 32;
+
     context.window = win;
 
     for (var x in win) {

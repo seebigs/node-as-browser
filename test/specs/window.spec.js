@@ -57,3 +57,7 @@ describe('fetch', function (expect) {
 describe('Promise', function (expect) {
     expect(typeof Promise).toBe('function');
 });
+
+describe('screen', function (expect) {
+    expect(typeof screen.colorDepth).toBe('number');
+});
