@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "jsdom": "^9.9.1",
-    "node-fetch": "^1.6.3"
+    "node-fetch": "^1.6.3",
+    "usertiming": "^0.1.8"
   },
   "devDependencies": {
     "feather-test": "^1.2.0"

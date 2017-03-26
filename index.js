@@ -1,6 +1,7 @@
 
 var fetch = require('node-fetch');
 var jsdom = require("jsdom").jsdom;
+var usertiming = require('usertiming');
 
 function enhanceToString () {
     "use strict"; // causes fn.call(null) to return [object Null] instead of [object global]
@@ -44,6 +45,13 @@ function init (options) {
             },
         };
     })();
+
+    // https://github.com/tmpvar/jsdom/issues/1510
+    win.performance = usertiming;
+    win.performance.navigation = {
+        redirectCount: 0,
+        type: 1
+    };
 
     win.fetch = fetch;
 

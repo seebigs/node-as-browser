@@ -61,3 +61,12 @@ describe('Promise', function (expect) {
 describe('screen', function (expect) {
     expect(typeof screen.colorDepth).toBe('number');
 });
+
+describe('performance', function (expect) {
+    expect(typeof performance).toBe('object');
+    expect(typeof performance.getEntries).toBe('function', 'getEntries');
+    expect(typeof performance.mark).toBe('function', 'mark');
+    expect(typeof performance.measure).toBe('function', 'measure');
+    expect(typeof performance.now).toBe('function', 'now');
+    expect(typeof performance.navigation).toBe('object', 'navigation');
+});
