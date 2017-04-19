@@ -33,6 +33,10 @@ describe('addEventListener', function (expect) {
     expect(typeof addEventListener).toBe('function');
 });
 
+describe('open', function (expect) {
+    expect(typeof open('http://url').close).toBe('function');
+});
+
 describe('blur', function (expect) {
     expect(typeof blur).toBe('function');
 });

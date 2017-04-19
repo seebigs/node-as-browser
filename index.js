@@ -27,6 +27,11 @@ function init (options) {
 
     var win = jsdom(options.html || '<!DOCTYPE html>', options).defaultView;
 
+    // allow child windows
+    win.open = function (url) {
+        return jsdom('<!DOCTYPE html>', { url: url }).defaultView;
+    };
+
     win.document.hasFocus = function () { return true; };
 
     // Adds LocalStorage
