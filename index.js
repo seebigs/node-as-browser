@@ -27,6 +27,8 @@ function init (options) {
 
     var win = jsdom(options.html || '<!DOCTYPE html>', options).defaultView;
 
+    mockDomNodeInserted(win);
+
     // allow child windows
     win.open = function (url) {
         return jsdom('<!DOCTYPE html>', { url: url }).defaultView;
@@ -85,6 +87,19 @@ function init (options) {
 
     // Enhance toString output for DOM nodes
     enhanceToString();
+}
+
+function mockDomNodeInserted (win) {
+    var nodeImpl = require('jsdom/lib/jsdom/living/nodes/Node-impl.js').implementation.prototype;
+    var oldInsertBefore = nodeImpl.insertBefore;
+
+    var newInsertBefore = function () {
+        var event = new CustomEvent("DOMNodeInserted", {});
+        win.document.dispatchEvent(event);
+        oldInsertBefore.apply(this, arguments);
+    };
+
+    nodeImpl.insertBefore = newInsertBefore;
 }
 
 module.exports = {

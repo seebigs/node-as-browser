@@ -50,3 +50,16 @@ describe('document.body.getBoundingClientRect', function (expect) {
 describe('document.body.style', function (expect) {
     expect(document.body.style.color).toBe('red');
 });
+
+describe('document.addEventListener.DOMNodeInserted', function (expect, done) {
+    spy.on(document, 'addEventListener', document.addEventListener);
+
+    document.addEventListener('DOMNodeInserted', function () {
+        // kind of a silly unit test... "if you are here, it worked"
+        expect(document.addEventListener).toHaveBeenCalled();
+        done();
+    });
+
+    var node = document.createElement('div');
+    document.body.appendChild(node);
+});
