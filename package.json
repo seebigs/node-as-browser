@@ -22,6 +22,6 @@
     "usertiming": "^0.1.8"
   },
   "devDependencies": {
-    "feather-test": "^1.2.0"
+    "feather-test-browser": "^1.2.0"
   }
 }
