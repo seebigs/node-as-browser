@@ -1,7 +1,11 @@
 
 var fetch = require('node-fetch');
-var jsdom = require("jsdom").jsdom;
+var JSDOM = require("jsdom").JSDOM;
 var usertiming = require('usertiming');
+
+function newJSDOM (html, options) {
+    return new JSDOM(html || '<!DOCTYPE html>', options);
+}
 
 function enhanceToString () {
     "use strict"; // causes fn.call(null) to return [object Null] instead of [object global]
@@ -23,15 +27,19 @@ function init (options) {
     options = options || {};
     var context = options.context || global;
 
-    options.url = options.url || 'http://example.com/';
+    if (options.url) {
+        options.url = options.url;
+    }
 
-    var win = jsdom(options.html || '<!DOCTYPE html>', options).defaultView;
+    options.runScripts = 'dangerously';
+    options.resources = "usable";
 
-    mockDomNodeInserted(win);
+    this._dom = newJSDOM(options.html, options);
+    var win = this._dom.window;
 
     // allow child windows
     win.open = function (url) {
-        return jsdom('<!DOCTYPE html>', { url: url }).defaultView;
+        return newJSDOM(null, { url: url }).window;
     };
 
     win.document.hasFocus = function () { return true; };
@@ -87,21 +95,18 @@ function init (options) {
 
     // Enhance toString output for DOM nodes
     enhanceToString();
+
+    return context;
 }
 
-function mockDomNodeInserted (win) {
-    var nodeImpl = require('jsdom/lib/jsdom/living/nodes/Node-impl.js').implementation.prototype;
-    var oldInsertBefore = nodeImpl.insertBefore;
-
-    var newInsertBefore = function () {
-        var event = new CustomEvent("DOMNodeInserted", {});
-        win.document.dispatchEvent(event);
-        oldInsertBefore.apply(this, arguments);
-    };
-
-    nodeImpl.insertBefore = newInsertBefore;
+function reconfigure (options) {
+    this._dom.reconfigure(options);
 }
 
-module.exports = {
-    init: init
-};
+function NodeAsBrowser () {
+    this._dom = null;
+    this.init = init;
+    this.reconfigure = reconfigure;
+}
+
+module.exports = new NodeAsBrowser();

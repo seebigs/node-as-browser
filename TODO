@@ -1,0 +1,30 @@
+
+
+
+// We can replicate script.onload behavior using the approach below
+//    but apparently this is no longer needed since jsdom version upgrade?
+//
+// function mockDomNodeInserted (win) {
+//     var nodeImpl = require('jsdom/lib/jsdom/living/nodes/Node-impl.js').implementation.prototype;
+//     var oldInsertBefore = nodeImpl.insertBefore;
+//     var NODE_COUNT = 0;
+//
+//     var newInsertBefore = function (newElement, refElement) {
+//         NODE_COUNT++;
+//         var nodeId = 'INSERTED' + NODE_COUNT;
+//
+//         if (typeof newElement.onload === 'function') {
+//             win.document.addEventListener('DOMNodeInserted', function (ev) {
+//                 if (ev.detail.id === nodeId) {
+//                     newElement.onload.call(newElement);
+//                 }
+//             });
+//         }
+//
+//         var event = new CustomEvent('DOMNodeInserted', { detail: { id: nodeId, type: newElement.nodeName.toLowerCase() } });
+//         win.document.dispatchEvent(event);
+//         oldInsertBefore.apply(this, arguments);
+//     };
+//
+//     nodeImpl.insertBefore = newInsertBefore;
+// }

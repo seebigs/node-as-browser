@@ -51,15 +51,13 @@ describe('document.body.style', function (expect) {
     expect(document.body.style.color).toBe('red');
 });
 
-describe('document.addEventListener.DOMNodeInserted', function (expect, done) {
-    spy.on(document, 'addEventListener', document.addEventListener);
-
-    document.addEventListener('DOMNodeInserted', function () {
-        // kind of a silly unit test... "if you are here, it worked"
-        expect(document.addEventListener).toHaveBeenCalled();
+describe('document.appendChild script execution and onload', function (expect, done) {
+    var s = document.createElement('script');
+    s.src = __dirname + '/../fixture/script.js';
+    s.onload = function () {
+        expect(this.nodeName).toBe('SCRIPT');
+        expect(document.body.innerHTML.indexOf('<span>LOADED</span>')).not.toBe(-1);
         done();
-    });
-
-    var node = document.createElement('div');
-    document.body.appendChild(node);
+    };
+    document.head.appendChild(s);
 });
