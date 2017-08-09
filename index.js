@@ -42,6 +42,8 @@ function init (options) {
         return newJSDOM(null, { url: url }).window;
     };
 
+    win.navigator.sendBeacon = function () {};
+
     win.document.hasFocus = function () { return true; };
 
     // Adds LocalStorage

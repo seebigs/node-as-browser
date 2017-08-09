@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "repl": "node ./test/interactive.js && node",
-    "test": "node ./test/automated.js"
+    "test": "node test"
   },
   "repository": {
     "type": "git",

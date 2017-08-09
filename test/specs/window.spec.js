@@ -1,6 +1,7 @@
 
 describe('navigator', function (expect) {
     expect(navigator.userAgent).toContain(' jsdom/');
+    expect(typeof navigator.sendBeacon).toBe('function');
 });
 
 describe('HTMLElement', function (expect) {
