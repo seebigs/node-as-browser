@@ -95,6 +95,10 @@ function init (options) {
 
     context.Image = win.Image;
 
+    // needs to be overriden here specifically, but not sure why
+    // somehow allows external scripts to run in same context
+    context.document = win.document;
+
     // Enhance toString output for DOM nodes
     enhanceToString();
 
