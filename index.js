@@ -83,7 +83,11 @@ function init (options) {
 
     for (var x in win) {
         if (typeof context[x] === 'undefined') {
-            context[x] = win[x];
+            try {
+                context[x] = win[x];
+            } catch (e) {
+                // not sure what to do if this fails
+            }
         }
     }
 
